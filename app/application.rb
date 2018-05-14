@@ -5,18 +5,9 @@
 class Application
   def call(env)
     resp = Rack::Response.new
- 
-    time = Time.now.hour 
-
-    case time 
-      when 0..12
-        resp.write "Good Morning!"
-      when 13..23
-        resp.write "Good Afternoon!"
-    end 
+      resp.write (Time.now.hour < 13) ? "Good Morning!" : "Good Afternoon!"
     resp.finish
   end
-
 end
 
 
